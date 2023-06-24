@@ -4,6 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import indexRouter from './routes/index.routes.js'
+import authRouter from './routes/auth.routes.js'
 import { PORT } from './config.js';
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(morgan("dev"))
 app.use(cors())
 
 //route
+app.use(authRouter)
 app.use(indexRouter)
 
 //Routes public 

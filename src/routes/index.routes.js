@@ -3,35 +3,43 @@ import pool from "../db.js";
 
 const router = Router();
 
+// user
+// router.get("/users", async (req, res) => {
+//   const [rows] = await pool.query("SELECT * FROM Auth");
+//   res.json(rows);
+// });
+
 // SALAS
 router.get("/sala", async (req, res) => {
   const [rows] = await pool.query("SELECT * FROM sala");
   res.json(rows);
 });
 
-// CHAT
+// CREATE SALA
+router.post("/sala", async (req, res) => {
+  const { sala } = req.body;
+  const [rows] = await pool.query("INSERT INTO sala(sala) VALUES (?)", [
+    sala,
+  ]);
+
+  res.json(rows);
+});
+
+// GET CHAT
 router.get("/chat", async (req, res) => {
   const [rows] = await pool.query("SELECT * FROM chat");
+
   res.json(rows);
 });
 
-// registro
-router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
-  const [rows] = await pool.query(
-    "INSERT INTO Auth(username, password) VALUES (?, ?)",
-    [username, password]
-  );
+// CREATE CHAT
+router.post("/chat", async (req, res) => {
+  const { chat } = req.body;
+  const [rows] = await pool.query("INSERT INTO datachat(chat) VALUES (?)", [
+    chat,
+  ]);
 
-  res.status(204);
-});
-
-// CHAT
-router.get("/login/:id", async (req, res) => {
-  const [rows] = await pool.query("SELECT * FROM Auth WHERE id = ?", [req.params.id]);
   res.json(rows);
 });
-
-router;
 
 export default router;
