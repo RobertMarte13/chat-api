@@ -4,7 +4,7 @@ import pool from "../db.js";
 const router = Router()
 
 // registro
-router.post("/register", async (req, res) => {
+router.post("/api/register", async (req, res) => {
   const { username, password } = req.body;
 
   const auth = await pool.query("SELECT * FROM Auth");
@@ -26,8 +26,9 @@ router.post("/register", async (req, res) => {
 });
 
 // Login
-router.get("/login", async (req, res) => {
-  const { username, password } = req.body;
+router.get("/api/login/:username/:password", async (req, res) => {
+
+  const { username, password } = req.params;
 
   const auth = await pool.query("SELECT * FROM Auth");
   const users = auth[0];
