@@ -44,24 +44,12 @@ router.post("/api/chat", async (req, res) => {
   
   const { chat, chat_id } = req.body;
 
-  console.log(chat, chat_id);
-
-  const data = await pool.query("SELECT * FROM chat");
-
-  const objets = data[0];
-
-  const validation = objets.find((res) => res.chat_id === chat_id);
-  console.log(validation);
-
-  if (validation === undefined) {
-    const [rows] = await pool.query(
-      "INSERT INTO chat(chat, chat_id) VALUES (?, ?)",
-      [chat, chat_id]
-    );
-    res.json(rows);
-  } else {
-    res.status(404).json({ message: "Try another name or id" });
-  }
+  const [rows] = await pool.query(
+    "INSERT INTO chat(chat, chat_id) VALUES (?, ?)",
+    [chat, chat_id]
+  );
+  
+  res.json(rows);
 });
 
 export default router;
