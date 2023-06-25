@@ -21,6 +21,13 @@ CREATE TABLE chat (
     PRIMARY KEY (id)
 )
 
+CREATE TABLE chatt (
+    id INT(225) NOT NULL AUTO_INCREMENT,
+    chat VARCHAR(225) DEFAULT NULL,
+    chat_id VARCHAR(225) DEFAULT NULL,
+    PRIMARY KEY (id)
+)
+
 DESCRIBE user;
 
 INSERT INTO Auth (username, password) VALUES 
@@ -32,6 +39,9 @@ INSERT INTO sala (sala) VALUES
 
 INSERT INTO chat (chat) VALUES 
   ("Hola amigos");
+
+INSERT INTO chatt (chat, chat_id) VALUES 
+  ("Hola amigos", "robertmarte222");
 
 -- Modificando la fila
 ALTER TABLE chat 
